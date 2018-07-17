@@ -1,0 +1,42 @@
+#!/bin/bash
+
+makeit() {
+	cd $WRKDIR/INSTALLED
+	mkdir -p info
+	touch info/info
+	echo "Name=$Name" >> info/info
+	echo "Version=$Version" >> info/info
+	echo "Description=$Description" >> info/info
+	echo "Size=$Size" >> info/info
+	echo "License=$License" >> info/info
+}
+if [[ ! -s confile ]] ; then
+	echo "No Confile found on your current dir"
+	exit 1
+fi
+source confile
+
+TARBALL=$(echo $Source | rev | cut -d '/' -f1 | rev )
+TARDIR=$(echo ${TARBALL%*.*})
+TARDIR=$(echo ${TARDIR%*.*})
+WRKDIR=$(echo $PWD)
+grep -Fxq "$Name $Version" /System/Data/installed
+if [[ $? == 0 ]] ; then
+	echo "Package already installed"
+	exit 1
+fi
+echo $TARBALL
+if [[ ! -f TARBALL ]] ; then
+wget -q --show-progress $Source
+fi
+if [[ ! -d src ]] ; then
+mkdir src
+tar -xf $TARBALL -C src
+fi
+cd src/$TARDIR
+compileit $WRKDIR/INSTALLED >> ../../compileme.log
+if [[ $? != 0 ]] ; then
+	echo "ERROR"
+	exit 1
+fi
+makeit
