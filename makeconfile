@@ -1,10 +1,16 @@
 #!/bin/sh
-mkdir $1-$2
-cd $1-$2
-if [[ ! -s confile ]] ; then
+
+# =============================================================================
+# confile nothing but a simple file which contains information about packages
+# information about how to compile it 
+# simple and straight forward
+
+mkdir $1-$2	# make folder for clean development with arguments $1 = Name && $2 = Version
+cd $1-$2		
+				
 cat > confile << "EOF"
-Name=$1
-Version=$2
+Name=
+Version=
 Description=" "
 License=" "
 Source=" "
@@ -18,5 +24,4 @@ return $?
 
 }
 EOF
-fi
 nano confile
