@@ -17,9 +17,10 @@ Source=" "
 
 
 compileit() {
-./configure --prefix=/usr --disable-static
-make -j4 
-make install DESTDIR=$1
+# compilation command
+#./configure --prefix=/usr --disable-static
+# make -j4 
+# make install DESTDIR=$1
 return $?
 
 }
