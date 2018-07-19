@@ -1,0 +1,39 @@
+#!/bin/sh
+. /System/Nishu/commands/inc/inc
+
+
+install() {
+	mkdir -p /System/Data/Packages/"$Name"/"$Version"
+	tar -C / -xaf $1 
+	if [[ -s /info/pre ]] ; then
+		sh /info/pre
+	fi
+	if [[ -s /info/post ]] ; then
+		sh /info/post
+	fi
+	#sha512sum -c /info/shas >> /dev/null
+	
+	if [[ $? != 0 ]] ; then
+		echo -e "${FAIL}Failed to check package integrity${NC}"
+		uninstall
+	elif [[ $? == 0 ]] ; then
+		echo -e "${DONE}Integrety check${NC}"
+	fi
+	mv /info /System/Data/Packages/"$Name"/"$Version"/info
+	date >> /System/Data/Packages/"$Name"/"$Version"/info/date
+	echo "$Name $Version" >> /System/Data/installed
+	while read line ; do
+	echo $line >> $DATA/CMD
+	done < "$DATA/Packages/"$Name"/"$Version"/info/Desc"
+
+}
+
+get_info $1
+grep -Fxq "$Name $Version" $INSTALLED
+if [[ $? == 0 ]] ; then
+	echo -e "${LRED} Package already installed${NC}"
+	exit
+fi
+print_info
+install $1
+echo -e "${LGREEN}Packaged Sucessfully installed${NC}"
