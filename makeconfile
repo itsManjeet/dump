@@ -24,5 +24,6 @@ compileit() {
 return $?
 
 }
+## write description here
 EOF
 nano confile
