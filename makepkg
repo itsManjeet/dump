@@ -1,14 +1,24 @@
 #!/bin/bash
-
+. /System/Nishu/commands/inc/inc
 makeit() {
+	Size=$(du -hs $WRKDIR/INSTALLED/ | cut -f1)
 	cd $WRKDIR/INSTALLED
 	mkdir -p info
 	touch info/info
 	echo "Name=$Name" >> info/info
 	echo "Version=$Version" >> info/info
-	echo "Description=$Description" >> info/info
+	echo "Description=\"$Description\"" >> info/info
 	echo "Size=$Size" >> info/info
 	echo "License=$License" >> info/info
+	echo "Packager=\"$Packager\"" >> info/info
+	find . -type f -not -path "./info/*" >> info/list
+	for i in $( find . -type f -not -path "./info/*" ) ; do
+		sha512sum $i >> info/sha
+	done
+	touch info/Desc
+	 cat $WRKDIR/confile | grep "##" | cut -d '#' -f3  >> info/Desc
+	
+	tar -caf ../$Name-$Version.pkg.tar.lzma * 
 }
 if [[ ! -s confile ]] ; then
 	echo "No Confile found on your current dir"
@@ -20,23 +30,44 @@ TARBALL=$(echo $Source | rev | cut -d '/' -f1 | rev )
 TARDIR=$(echo ${TARBALL%*.*})
 TARDIR=$(echo ${TARDIR%*.*})
 WRKDIR=$(echo $PWD)
+if [[  -d $WRKDIR/INSTALLED ]] ; then
+	rm -rf $WRKDIR/INSTALLED
+fi
 grep -Fxq "$Name $Version" /System/Data/installed
 if [[ $? == 0 ]] ; then
 	echo "Package already installed"
 	exit 1
 fi
-echo $TARBALL
 if [[ ! -f $TARBALL ]] ; then
-wget -q --show-progress $Source
+echo -e "${BCYAN}Downloading in progress..${NC}"
+wget $Source
+if [[ $? != 0 ]] ; then
+	echo -e "${BRED}Failed to download file${NC}"
+	exit 1
+fi
+rm -rf src
 fi
 if [[ ! -d src ]] ; then
 mkdir src
 tar -xf $TARBALL -C src
 fi
 cd src/$TARDIR
-compileit $WRKDIR/INSTALLED >> ../../compileme.log
+echo " == Compiling it ===================================== " >> ../../compileme.log
+echo -e "${LCYAN}Compiling in progress${NC}"
+compileit $WRKDIR/INSTALLED #>> ../../compileme.log
 if [[ $? != 0 ]] ; then
 	echo "ERROR"
 	exit 1
+else 
+	echo "${BGREEN}Compilation complete${NC}"
 fi
-makeit
+echo " == Making it ===================================== " >> ../../compileme.log
+echo -e "${LCYAN}Making package in progress${NC}"
+makeit #>> ../../compileme.log
+if [[ $? == 0 ]] ; then
+	echo -e "${BGREEN}Package compile sucessfully${NC}"
+else
+	echo -e "${LRED}Error in compiling package${NC}"
+	sleep 2
+	less $WRKDIR/compileme.log
+fi
