@@ -9,13 +9,20 @@ mkdir $1-$2	# make folder for clean development with arguments $1 = Name && $2 =
 cd $1-$2		
 				
 cat > confile << "EOF"
+# Confile script
+#- Depends : dep1 dep2
 Name=
 Version=
 Description=" "
 License=" "
 Source=" "
+Packager=" "
+Group=" "
 
-
+patchit() {
+# patch if you want
+return 0
+}
 compileit() {
 # compilation command
 #./configure --prefix=/usr --disable-static

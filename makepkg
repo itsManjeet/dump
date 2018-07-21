@@ -1,5 +1,5 @@
 #!/bin/bash
-. /System/Nishu/commands/inc/inc
+. /Nishu/commands/inc/inc
 makeit() {
 	Size=$(du -hs $WRKDIR/INSTALLED/ | cut -f1)
 	cd $WRKDIR/INSTALLED
@@ -17,7 +17,7 @@ makeit() {
 	done
 	touch info/Desc
 	 cat $WRKDIR/confile | grep "##" | cut -d '#' -f3  >> info/Desc
-	
+	cat $WRKDIR/confile | grep "#- Depends" | sed "/s#-//g" >> info/depends
 	tar -caf ../$Name-$Version.pkg.tar.lzma * 
 }
 if [[ ! -s confile ]] ; then
@@ -52,9 +52,13 @@ mkdir src
 tar -xf $TARBALL -C src
 fi
 cd src/$TARDIR
+if [[ ! -s patchdone ]] ; then
+	patchit
+	touch patchdone
+fi
 echo " == Compiling it ===================================== " >> ../../compileme.log
 echo -e "${LCYAN}Compiling in progress${NC}"
-compileit $WRKDIR/INSTALLED #>> ../../compileme.log
+compileit $WRKDIR/INSTALLED | tee -a $WRKDIR/compileme.log
 if [[ $? != 0 ]] ; then
 	echo "ERROR"
 	exit 1
@@ -63,7 +67,7 @@ else
 fi
 echo " == Making it ===================================== " >> ../../compileme.log
 echo -e "${LCYAN}Making package in progress${NC}"
-makeit #>> ../../compileme.log
+makeit | tee -a $WRKDIR/compileme.log
 if [[ $? == 0 ]] ; then
 	echo -e "${BGREEN}Package compile sucessfully${NC}"
 else
