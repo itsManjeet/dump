@@ -1,0 +1,101 @@
+#!/bin/sh
+
+#	print details on console screen
+#
+print_details() {
+		echo "-----------------------------------------------------------"
+		echo  "		Package name	= $1 "
+		echo "		Version		= $2"
+		echo "		License		= $4"
+		echo "		Size		= $3"
+		echo "------------------------------------------------------------"
+		
+		
+}
+
+
+write_install_info() {
+		echo "$1 $2" >> /System/Data/installed
+		touch "$3"/"$1"/"$2"/info
+		echo "Package_install_dir		$4" >> "$3"/"$1"/"$2"/info
+		echo "Package_data_dir			$3" >> "$3"/"$1"/"$2"/info
+		date >> "$3"/"$1"/"$2"/info
+		
+}
+
+
+		tar -xf $1 .PKGINFO
+		PKG_NAME=$(awk '{for(i=1;i<=NF;i++) if ($i=="pkgname") print $(i+2)}' .PKGINFO) 
+		PKG_VER=$(awk '{for(i=1;i<=NF;i++) if ($i=="pkgver") print $(i+2)}' .PKGINFO )
+		PKG_LIC=$(awk '{for(i=1;i<=NF;i++) if ($i=="license") print $(i+2)}' .PKGINFO )
+		PKG_GROUP=$(awk '{for(i=1;i<=NF;i++) if ($i=="group") print $(i+2)}' .PKGINFO )
+		PKG_SIZE=$(awk '{for(i=1;i<=NF;i++) if ($i=="size") print $(i+2)}' .PKGINFO )
+
+		PKG_INSTALL_DIR=/System/Packages/"$PKG_GROUP"/
+		PKG_DATA_DIR=/System/Data/Packages
+		
+		grep -Fxq "$PKG_NAME $PKG_VER" /System/Data/installed
+		if [ $? == 1 ] ; then
+		print_details $PKG_NAME $PKG_VER $PKG_SIZE $PKG_LIC
+	
+		mkdir -p "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/
+		mkdir -p "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/
+
+		tar -xf $1 -C "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/
+		mv "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.PKGINFO "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/
+		if [ -f "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.MTREE ] ; then
+		mv "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.MTREE "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/
+		fi
+		if [ -f "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.BUILDINFO ] ; then
+		mv "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.BUILDINFO "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/
+		fi
+		if [ -f "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.INSTALL ] ; then
+		mv "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/.INSTALL "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/
+		
+		source "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/.INSTALL
+
+		fi
+		if typeset -f pre_install > /dev/null ; then
+			pre_install
+		fi	
+										
+	# linking package files installed in /packages to the roots
+
+		lndir -silent "$PKG_INSTALL_DIR"/"$PKG_NAME"/"$PKG_VER"/ /
+	
+	# Checking if post_install like finction exist
+		if typeset -f post_install > /dev/null ; then
+			post_install $PKG_INSTALL_DIR 
+		fi
+
+		write_install_info $PKG_NAME $PKG_VER $PKG_DATA_DIR $PKG_INSTALL_DIR
+		echo "Package Sucessfully Configured"
+		echo "please manually install its dependencies "
+		for dependency in $(awk '{for(i=1;i<=NF;i++) if ($i=="depend") print $(i+2)}' "$PKG_DATA_DIR"/"$PKG_NAME"/"$PKG_VER"/.PKGINFO) ; do
+				grep -Fq "$dependency" /System/Data/installed
+			if [ $? == 0 ] ; then 
+				echo "[ Installed ] 		$dependency"
+				continue
+			fi
+				echo " >>>>>			$dependency"
+
+			done
+		update-desktop-database
+		update-mime-database /usr/share/mime
+		gtk-update-icon-cache /usr/share/icons/hicolor
+		glib-compile-schemas /usr/share/glib-2.0/schemas
+		result=0
+		else
+			echo "** Package already installed **"
+			echo "----------------------------------------------------------------------------------" >> /System/dump/log
+			echo "$PKG_NAME $PKG_VER " >> /System/dump/log
+			date >> /System/dump/log
+			echo " " >> /System/dump/log
+			
+			result=1
+		fi
+
+		
+		
+
+		
