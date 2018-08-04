@@ -1,5 +1,5 @@
 #!/bin/bash
-. /Nishu/commands/inc/inc
+. /System/Nishu/commands/inc/inc
 makeit() {
 	Size=$(du -hs $WRKDIR/INSTALLED/ | cut -f1)
 	cd $WRKDIR/INSTALLED
@@ -16,9 +16,30 @@ makeit() {
 		sha512sum $i >> info/sha
 	done
 	touch info/Desc
-	 cat $WRKDIR/confile | grep "##" | cut -d '#' -f3  >> info/Desc
-	cat $WRKDIR/confile | grep "#- Depends" | sed "/s#-//g" >> info/depends
-	tar -caf ../$Name-$Version.pkg.tar.lzma * 
+	 cat $WRKDIR/confile | grep "##" | cut -d ' ' -f2- >> info/Desc
+	grep -Fq "#DEP" $WRKDIR/confile
+	if [[ $? == 0 ]] ; then
+		cat $WRKDIR/confile | grep "#DEP" | cut -d " " -f2 >> info/Depends
+	fi
+	grep -Fq "#MAK" $WRKDIR/confile
+	if [[ $? == 0 ]] ; then
+		cat $WRKDIR/confile | grep "#MAK" | cut -d " " -f2 >> info/MakeDepends
+	fi
+	grep -Fq "#OPT" $WRKDIR/confile
+	if [[ $? == 0 ]] ; then
+	cat $WRKDIR/confile | grep "#OPT" | cut -d " " -f2 >> info/OptDepends
+	fi
+	grep -Fq "#PRE" $WRKDIR/confile
+	if [[ $? == 0 ]] ; then
+	cat $WRKDIR/confile | grep "#PRE" | cut -d " " -f2- >> info/pre
+	chmod +x info/pre
+	fi
+	grep -Fq "#POST" $WRKDIR/confile
+	if [[ $? == 0 ]] ; then
+	cat $WRKDIR/confile | grep "#POST" | cut -d " " -f2- >> info/post
+	chmod +x info/post
+	fi
+	tar -caf ../$Name-$Version.pkg * 
 }
 if [[ ! -s confile ]] ; then
 	echo "No Confile found on your current dir"
@@ -52,13 +73,9 @@ mkdir src
 tar -xf $TARBALL -C src
 fi
 cd src/$TARDIR
-if [[ ! -s patchdone ]] ; then
-	patchit
-	touch patchdone
-fi
 echo " == Compiling it ===================================== " >> ../../compileme.log
 echo -e "${LCYAN}Compiling in progress${NC}"
-compileit $WRKDIR/INSTALLED | tee -a $WRKDIR/compileme.log
+compileit $WRKDIR/INSTALLED #>> ../../compileme.log
 if [[ $? != 0 ]] ; then
 	echo "ERROR"
 	exit 1
@@ -67,7 +84,7 @@ else
 fi
 echo " == Making it ===================================== " >> ../../compileme.log
 echo -e "${LCYAN}Making package in progress${NC}"
-makeit | tee -a $WRKDIR/compileme.log
+makeit #>> ../../compileme.log
 if [[ $? == 0 ]] ; then
 	echo -e "${BGREEN}Package compile sucessfully${NC}"
 else
