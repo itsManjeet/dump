@@ -1,6 +1,10 @@
 find_dep() {
 get=1
-for i in * ; do
+PORTLOC=/usr/port/
+BUILDSCRIPT="spkgbuild"
+CACHEDEP=/var/cache/deptmp
+INSTALLED=/var/cache/installed
+for i in $PORTLOC/* ; do
 	if (( $get==0 )) ; then
 		break
 	fi
@@ -22,15 +26,15 @@ fi
 
 write_dep() {
 for dep in ${depends[@]} ; do
-	grep -Fxq $dep tmpdep
+	grep -Fxq $dep $CACHEDEP
 	if [[ $? == 0 ]] ; then
 		continue
 	fi
-	grep -Fxq $dep installed
+	grep -Fxq $dep $INSTALLED
 	if [[ $? == 0 ]] ; then
 		continue
 	fi
-	echo "$dep" >> tmpdep
+	echo "$dep" >> $CACHEDEP
 	find_dep $dep
 	write_dep
 done
@@ -40,12 +44,12 @@ touch tmpdep
 echo "getting dependencies"
 for installed in /var/lib/packages/Packages/* ; do
 		INSNAME=$(echo $installed | rev | cut -d '/' -f1 | rev)
-		echo $INSNAME >> installed
+		echo $INSNAME >> $INSTALLED
 done
 find_dep $1
 write_dep
 echo "== Package dependencies =========================================="
-column tmpdep
+column $CACHEDEP
 echo "================================================================"
-COUNT=$(wc -l tmpdep | cut -d ' ' -f1)
+COUNT=$(wc -l $CACHEDEP | cut -d ' ' -f1)
 echo "Total ${COUNT} Packages are needed"
