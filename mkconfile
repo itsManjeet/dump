@@ -14,7 +14,7 @@ Version=
 Description=" "
 License=" "
 Source=" "
-
+Group=" "
 
 compileit() {
 # compilation command

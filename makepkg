@@ -1,94 +1,36 @@
 #!/bin/bash
-. /System/Nishu/commands/inc/inc
-makeit() {
-	Size=$(du -hs $WRKDIR/INSTALLED/ | cut -f1)
-	cd $WRKDIR/INSTALLED
-	mkdir -p info
-	touch info/info
-	echo "Name=$Name" >> info/info
-	echo "Version=$Version" >> info/info
-	echo "Description=\"$Description\"" >> info/info
-	echo "Size=$Size" >> info/info
-	echo "License=$License" >> info/info
-	echo "Packager=\"$Packager\"" >> info/info
-	find . -type f -not -path "./info/*" >> info/list
-	for i in $( find . -type f -not -path "./info/*" ) ; do
-		sha512sum $i >> info/sha
-	done
-	touch info/Desc
-	 cat $WRKDIR/confile | grep "##" | cut -d ' ' -f2- >> info/Desc
-	grep -Fq "#DEP" $WRKDIR/confile
-	if [[ $? == 0 ]] ; then
-		cat $WRKDIR/confile | grep "#DEP" | cut -d " " -f2 >> info/Depends
-	fi
-	grep -Fq "#MAK" $WRKDIR/confile
-	if [[ $? == 0 ]] ; then
-		cat $WRKDIR/confile | grep "#MAK" | cut -d " " -f2 >> info/MakeDepends
-	fi
-	grep -Fq "#OPT" $WRKDIR/confile
-	if [[ $? == 0 ]] ; then
-	cat $WRKDIR/confile | grep "#OPT" | cut -d " " -f2 >> info/OptDepends
-	fi
-	grep -Fq "#PRE" $WRKDIR/confile
-	if [[ $? == 0 ]] ; then
-	cat $WRKDIR/confile | grep "#PRE" | cut -d " " -f2- >> info/pre
-	chmod +x info/pre
-	fi
-	grep -Fq "#POST" $WRKDIR/confile
-	if [[ $? == 0 ]] ; then
-	cat $WRKDIR/confile | grep "#POST" | cut -d " " -f2- >> info/post
-	chmod +x info/post
-	fi
-	tar -caf ../$Name-$Version.pkg * 
-}
-if [[ ! -s confile ]] ; then
-	echo "No Confile found on your current dir"
-	exit 1
-fi
+DESTDIR="/Work/Packages"
+SOURCEDIR="/Work/Source"
+PKGSDIR="/Work/tars"
 source confile
+echo 2>/tmp/build_logs
+echo "Compiling $Name..."
+tar -xf $PKGSDIR/$Sourcefile -C $SOURCEDIR
+cd $SOURCEDIR
+if [[ -d $DESTDIR/$Group/$Name ]] ; then
+	rm -rf $DESTDIR/$Group/$Name
+fi
+makeit $DESTDIR/$Group/"$Name"
 
-TARBALL=$(echo $Source | rev | cut -d '/' -f1 | rev )
-TARDIR=$(echo ${TARBALL%*.*})
-TARDIR=$(echo ${TARDIR%*.*})
-WRKDIR=$(echo $PWD)
-if [[  -d $WRKDIR/INSTALLED ]] ; then
-	rm -rf $WRKDIR/INSTALLED
-fi
-grep -Fxq "$Name $Version" /System/Data/installed
-if [[ $? == 0 ]] ; then
-	echo "Package already installed"
-	exit 1
-fi
-if [[ ! -f $TARBALL ]] ; then
-echo -e "${BCYAN}Downloading in progress..${NC}"
-wget $Source
 if [[ $? != 0 ]] ; then
-	echo -e "${BRED}Failed to download file${NC}"
-	exit 1
-fi
-rm -rf src
-fi
-if [[ ! -d src ]] ; then
-mkdir src
-tar -xf $TARBALL -C src
-fi
-cd src/$TARDIR
-echo " == Compiling it ===================================== " >> ../../compileme.log
-echo -e "${LCYAN}Compiling in progress${NC}"
-compileit $WRKDIR/INSTALLED #>> ../../compileme.log
-if [[ $? != 0 ]] ; then
-	echo "ERROR"
-	exit 1
-else 
-	echo "${BGREEN}Compilation complete${NC}"
-fi
-echo " == Making it ===================================== " >> ../../compileme.log
-echo -e "${LCYAN}Making package in progress${NC}"
-makeit #>> ../../compileme.log
-if [[ $? == 0 ]] ; then
-	echo -e "${BGREEN}Package compile sucessfully${NC}"
+	touch "/tmp/failed"
 else
-	echo -e "${LRED}Error in compiling package${NC}"
-	sleep 2
-	less $WRKDIR/compileme.log
+	touch "/tmp/passed"
 fi
+
+cd $DESTDIR/$Group/"$Name"
+Size=$( du -hs | cut -f1)
+Date=$( date )
+mkdir info
+echo "Name: $Name" >> info/info
+echo "Version: $Version" >> info/info
+echo "Description: $Description" >> info/info
+echo "Size: $Size" >> info/info
+echo "Date: $Date" >> info/info
+echo "Packager: Manjeet Singh" >> info/info
+
+find . -type f >> info/list
+
+for i in $(find . -type f) ; do
+	sha512sum $i >> info/hashs
+done
