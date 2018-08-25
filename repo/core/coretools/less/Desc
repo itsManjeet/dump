@@ -1,0 +1,3 @@
+less:A file viewer or pager; it displays the contents of the given file, letting the user scroll, find strings, and jump to marks
+lessecho:Needed to expand meta-characters, such as * and ?, in filenames on Unix systems
+lesskey:Used to specify the key bindings for less 

@@ -1,0 +1,12 @@
+Name="bison"
+Version="3.0.4"
+Description="The Bison package contains a parser generator"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr --docdir=/usr/share/doc/bison-3.0.4
+make -j4
+make install DESTDIR=$1
+}

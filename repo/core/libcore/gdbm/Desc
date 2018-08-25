@@ -1,0 +1,5 @@
+gdbm_dump:Dumps a GDBM database to a file
+gdbm_load:Recreates a GDBM database from a dump file
+gdbmtool:Tests and modifies a GDBM database
+libgdbm:Contains functions to manipulate a hashed database
+libgdbm_compat:Compatibility library containing older DBM functions 

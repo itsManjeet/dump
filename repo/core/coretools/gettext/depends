@@ -1,0 +1,5 @@
+acl (dep)
+gcc (dep)
+glib2 (dep)
+libunistring (dep)
+bash (dep)

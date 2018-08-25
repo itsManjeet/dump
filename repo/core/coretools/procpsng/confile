@@ -1,0 +1,18 @@
+Name="procpsng"
+Version="3.3.12"
+Description="The Procps-ng package contains programs for monitoring processes"
+Sourcefile="procps-ng-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd procps-ng-$Version
+
+./configure --prefix=/usr                            \
+            --libdir=/lib                        \
+            --docdir=/usr/share/doc/procps-ng-3.3.12 \
+            --disable-static                         \
+            --disable-kill
+make -j4
+make check
+make install DESTDIR=$1
+}

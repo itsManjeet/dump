@@ -1,0 +1,34 @@
+chage:Used to change the maximum number of days between obligatory password changes
+chfn:Used to change a user's full name and other information
+chgpasswd:Used to update group passwords in batch mode
+chpasswd:Used to update user passwords in batch mode
+chsh:Used to change a user's default login shell
+expiry:Checks and enforces the current password expiration policy
+faillog:Is used to examine the log of login failures, to set a maximum number of failures before an account is blocked, or to reset the failure count
+gpasswd:Is used to add and delete members and administrators to groups
+groupadd:Creates a group with the given name
+groupdel:Deletes the group with the given name
+groupmems:Allows a user to administer his/her own group membership list without the requirement of super user privileges.
+groupmod:Is used to modify the given group's name or GID
+grpck:Verifies the integrity of the group files /etc/group and /etc/gshadow
+grpconv:Creates or updates the shadow group file from the normal group file
+grpunconv:Updates /etc/group from /etc/gshadow and then deletes the latter
+lastlog:Reports the most recent login of all users or of a given user
+login:Is used by the system to let users sign on
+logoutd:Is a daemon used to enforce restrictions on log-on time and ports
+newgidmap:Is used to set the gid mapping of a user namespace
+newgrp:Is used to change the current GID during a login session
+newuidmap:Is used to set the uid mapping of a user namespace
+newusers:Is used to create or update an entire series of user accounts
+nologin:Displays a message that an account is not available; it is designed to be used as the default shell for accounts that have been disabled
+passwd:Is used to change the password for a user or group account
+pwck:Verifies the integrity of the password files /etc/passwd and /etc/shadow
+pwconv:Creates or updates the shadow password file from the normal password file
+pwunconv:Updates /etc/passwd from /etc/shadow and then deletes the latter
+sg:Executes a given command while the user's GID is set to that of the given group
+su:Runs a shell with substitute user and group IDs
+useradd:Creates a new user with the given name, or updates the default new-user information
+userdel:Deletes the given user account
+usermod:Is used to modify the given user's login name, User Identification (UID), shell, initial group, home directory, etc.
+vigr:Edits the /etc/group or /etc/gshadow files
+vipw:Edits the /etc/passwd or /etc/shadow files 

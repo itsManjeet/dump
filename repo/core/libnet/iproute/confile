@@ -1,0 +1,14 @@
+Name="iproute"
+Version="4.15.0"
+Description="The IPRoute2 package contains programs for basic and advanced IPV4-based networking. "
+Sourcefile="iproute2-$Version.tar.xz"
+Group="Core/libnet"
+
+makeit() {
+cd iproute2-$Version
+sed -i /ARPD/d Makefile
+rm -fv man/man8/arpd.8
+sed -i 's/m_ipt.o//' tc/Makefile
+make -j4
+make DOCDIR=$1/usr/share/doc/iproute2-4.15.0  DESTDIR=$1 install
+}

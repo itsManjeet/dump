@@ -1,0 +1,4 @@
+bzip (dep)
+gcc (dep)
+xz (dep)
+zlip (dep)

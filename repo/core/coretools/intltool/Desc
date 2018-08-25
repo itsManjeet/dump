@@ -1,0 +1,5 @@
+intltoolize:Prepares a package to use intltool
+intltool-extract:Generates header files that can be read by gettext
+intltool-merge:Merges translated strings into various file types
+intltool-prepare:Updates pot files and merges them with translation files
+intltool-update:Updates the po template files and merges them with the translations 

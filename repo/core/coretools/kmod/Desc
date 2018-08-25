@@ -1,0 +1,8 @@
+depmod:Creates a dependency file based on the symbols it finds in the existing set of modules; this dependency file is used by modprobe to automatically load the required modules
+insmod:Installs a loadable module in the running kernel
+kmod:Loads and unloads kernel modules
+lsmod:Lists currently loaded modules
+modinfo:Examines an object file associated with a kernel module and displays any information that it can glean
+modprobe:Uses a dependency file, created by depmod, to automatically load relevant modules
+rmmod:Unloads modules from the running kernel
+libkmod:This library is used by other programs to load and unload kernel modules 

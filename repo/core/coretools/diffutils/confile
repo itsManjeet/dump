@@ -1,0 +1,13 @@
+Name="diffutils"
+Version="3.6"
+Description=" The Diffutils package contains programs that show the differences between files or directories"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr
+make -j4
+make check
+make install DESTDIR=$1
+}

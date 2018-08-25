@@ -1,0 +1,16 @@
+Name="expat"
+Version="2.2.5"
+Description="The Expat package contains a stream oriented C library for parsing XML"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+sed -i 's|usr/bin/env |bin/|' run.sh.in
+./configure --prefix=/usr --disable-static
+make -j4
+# make check
+make install DESTDIR=$1
+install -v -dm755 $1/usr/share/doc/expat-2.2.5
+install -v -m644 doc/*.{html,png,css} $1/usr/share/doc/expat-2.2.5
+}

@@ -1,0 +1,16 @@
+Name="tar"
+Version="1.30"
+Description=" "
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+FORCE_UNSAFE_CONFIGURE=1  \
+./configure --prefix=/usr \
+            --bindir=/usr/bin
+
+make -j4
+make install DESTDIR=$1
+make -C doc install-html docdir=$1/usr/share/doc/tar-1.30
+}

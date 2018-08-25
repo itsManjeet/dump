@@ -1,0 +1,4 @@
+attr:Extends attributes on filesystem objects
+getfattr:Gets the extended attributes of filesystem objects
+setattr:Sets the extended attributes of filesystem objects
+libattr:Contains the libbrary functions for manipulating extended attributes 

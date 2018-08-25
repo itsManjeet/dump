@@ -1,0 +1,13 @@
+Name="libcap"
+Version="2.25"
+Description=" The Libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges."
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+sed -v '/install.*STALIBNAME/d' libcap/Makefile
+make -j4
+make RAISE_SETFCAP=no lib=usr/lib prefix=$1/usr install
+chmod -v 755 $1/usr/lib/libcap.so
+}

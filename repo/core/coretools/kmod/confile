@@ -1,0 +1,23 @@
+Name="kmod"
+Version="25"
+Description="The Kmod package contains libraries and utilities for loading kernel modules "
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr          \
+            --bindir=/usr/bin          \
+            --sysconfdir=/etc      \
+            --with-rootlibdir=/usr/lib \
+            --with-xz              \
+            --with-zlib
+make -j4
+make check
+make install DESTDIR=$1
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+  ln -sfv $1/usr/bin/kmod $1/usr/bin/$target
+done
+
+ln -sfv $1/usr/bin/kmod $1/usr/bin/lsmod
+}

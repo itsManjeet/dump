@@ -1,0 +1,16 @@
+Name="flex"
+Version="2.6.4"
+Description="The Flex package contains a utility for generating programs that recognize patterns in text. "
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i "/math.h/a #include <malloc.h>" src/flexdef.h
+HELP2MAN=/bin/true \
+./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.6.4
+make -j4
+make check
+make install DESTDIR=$1
+ln -sv $1/usr/bin/flex $1/usr/bin/lex
+}

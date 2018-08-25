@@ -1,0 +1,12 @@
+Name="check"
+Version="0.12.0"
+Description=" Check is a unit testing framework for C"
+Sourcefile="$Name-$Version.tar.gz"
+Group="Dev-tools/coredev"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr
+make -j4
+make install DESTDIR=$1
+}

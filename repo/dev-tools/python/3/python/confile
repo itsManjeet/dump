@@ -1,0 +1,24 @@
+Name="python"
+Version="3.6.4"
+Description="The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs or developing entire applications."
+Sourcefile="$Name-$Version.tar.xz"
+Group="Dev-tools/python/3/python "
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes
+make -j4
+make install DESTDIR=$1
+chmod -v 755 $1/usr/lib/libpython3.6m.so
+chmod -v 755 $1/usr/lib/libpython3.so
+install -v -dm755 $1/usr/share/doc/python-3.6.4/html 
+tar --strip-components=1  \
+    --no-same-owner       \
+    --no-same-permissions \
+    -C $1/usr/share/doc/python-3.6.4/html \
+    -xvf /work/tars/python-3.6.4-docs-html.tar.bz2
+}

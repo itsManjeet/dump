@@ -1,0 +1,4 @@
+awk:A link to gawk
+gawk:A program for manipulating text files; it is the GNU implementation of awk
+gawk-4.2.0:A hard link to gawk
+igawk:Gives gawk the ability to include files 

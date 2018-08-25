@@ -1,0 +1,17 @@
+Name="mpc"
+Version="1.1.0"
+Description="The MPC package contains a library for the arithmetic of complex numbers with arbitrarily high precision and correct rounding of the result. "
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/mpc-1.1.0
+make -j4
+make html
+# make check
+make install DESTDIR=$1
+make install-html DESTDIR=$1
+}

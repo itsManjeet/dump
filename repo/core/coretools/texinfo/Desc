@@ -1,0 +1,9 @@
+info:Used to read info pages which are similar to man pages, but often go much deeper than just explaining all the available command line options [For example, compare man bison and info bison.]
+install-info:Used to install info pages; it updates entries in the info index file
+makeinfo:Translates the given Texinfo source documents into info pages, plain text, or HTML
+pdftexi2dvi:Used to format the given Texinfo document into a Portable Document Format (PDF) file
+pod2texi:Converts Pod to Texinfo format
+texi2any:Translate Texinfo source documentation to various other formats
+texi2dvi:Used to format the given Texinfo document into a device-independent file that can be printed
+texi2pdf:Used to format the given Texinfo document into a Portable Document Format (PDF) file
+texindex:Used to sort Texinfo index files 

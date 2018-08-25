@@ -1,0 +1,12 @@
+bunzip2:Decompresses bzipped files
+bzcat:Decompresses to standard output
+bzcmp:Runs cmp on bzipped files
+bzdiff:Runs diff on bzipped files
+bzegrep:Runs egrep on bzipped files
+bzfgrep:Runs fgrep on bzipped files
+bzgrep:Runs grep on bzipped files
+bzip2:Compresses files using the Burrows-Wheeler block sorting text compression algorithm with Huffman coding; the compression rate is better than that achieved by more conventional compressors using “Lempel-Ziv” algorithms, like gzip
+bzip2recover:Tries to recover data from damaged bzipped files
+bzless:Runs less on bzipped files
+bzmore:Runs more on bzipped files
+libbz2:The library implementing lossless, block-sorting data compression, using the Burrows-Wheeler algorithm 

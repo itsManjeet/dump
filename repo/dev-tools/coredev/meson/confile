@@ -1,0 +1,12 @@
+Name="meson"
+Version="0.44.0"
+Description="Meson is an open source build system meant to be both extremely fast, and, even more importantly, as user friendly as possible. "
+Sourcefile="$Name-$Version.tar.gz"
+Group="Dev-tools/coredev/"
+
+makeit() {
+cd $Name-$Version
+mkdir -p $1
+python3 setup.py build
+python3 setup.py install
+}

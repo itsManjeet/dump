@@ -1,0 +1,7 @@
+bzip (dep)
+expat (dep)
+gdbm (dep)
+libffi (dep)
+libnsl (dep)
+openssl (dep)
+zlib (dep)

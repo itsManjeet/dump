@@ -1,0 +1,14 @@
+gunzip:Decompresses gzipped files
+gzexe:Creates self-decompressing executable files
+gzip:Compresses the given files using Lempel-Ziv (LZ77) coding
+uncompress:Decompresses compressed files
+zcat:Decompresses the given gzipped files to standard output
+zcmp:Runs cmp on gzipped files
+zdiff:Runs diff on gzipped files
+zegrep:Runs egrep on gzipped files
+zfgrep:Runs fgrep on gzipped files
+zforce:Forces a .gz extension on all given files that are gzipped files, so that gzip will not compress them again; this can be useful when file names were truncated during a file transfer
+zgrep:Runs grep on gzipped files
+zless:Runs less on gzipped files
+zmore:Runs more on gzipped files
+znew:Re-compresses files from compress format to gzip format—.Z to .gz 

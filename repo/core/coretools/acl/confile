@@ -1,0 +1,21 @@
+Name="acl"
+Version="2.2.52"
+Description="Just a test"
+Sourcefile="acl-2.2.52.src.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test
+sed -i 's/{(/\\{(/' test/run
+sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
+    libacl/__acl_to_any_text.c
+./configure --prefix=/usr    \
+            --bindir=/usr/bin    \
+            --disable-static \
+            --libexecdir=/usr/lib
+make -j4
+make install install-dev install-lib DESTDIR=$1
+chmod -v 755 $1/usr/lib/libacl.so
+}

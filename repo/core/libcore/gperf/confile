@@ -1,0 +1,13 @@
+Name="gperf"
+Version="3.1"
+Description="Gperf generates a perfect hash function from a key set. "
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr --docdir=/usr/share/doc/gperf-3.1
+make -j4
+# make check
+make install DESTDIR=$1
+}

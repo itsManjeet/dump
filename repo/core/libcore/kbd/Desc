@@ -1,0 +1,25 @@
+chvt:Changes the foreground virtual terminal
+deallocvt:Deallocates unused virtual terminals
+dumpkeys:Dumps the keyboard translation tables
+fgconsole:Prints the number of the active virtual terminal
+getkeycodes:Prints the kernel scancode-to-keycode mapping table
+kbdinfo:Obtains information about the status of a console
+kbd_mode:Reports or sets the keyboard mode
+kbdrate:Sets the keyboard repeat and delay rates
+loadkeys:Loads the keyboard translation tables
+loadunimap:Loads the kernel unicode-to-font mapping table
+mapscrn:An obsolete program that used to load a user-defined output character mapping table into the console driver; this is now done by setfont
+openvt:Starts a program on a new virtual terminal (VT)
+psfaddtable:Adds a Unicode character table to a console font
+psfgettable:Extracts the embedded Unicode character table from a console font
+psfstriptable:Removes the embedded Unicode character table from a console font
+psfxtable:Handles Unicode character tables for console fonts
+setfont:Changes the Enhanced Graphic Adapter (EGA) and Video Graphics Array (VGA) fonts on the console
+setkeycodes:Loads kernel scancode-to-keycode mapping table entries; this is useful if there are unusual keys on the keyboard
+setleds:Sets the keyboard flags and Light Emitting Diodes (LEDs)
+setmetamode:Defines the keyboard meta-key handling
+setvtrgb:Sets the console color map in all virtual terminals
+showconsolefont:Shows the current EGA/VGA console screen font
+showkey:Reports the scancodes, keycodes, and ASCII codes of the keys pressed on the keyboard
+unicode_start:Puts the keyboard and console in UNICODE mode [Don't use this program unless your keymap file is in the ISO-8859-1 encoding. For other encodings, this utility produces incorrect results.]
+unicode_stop:Reverts keyboard and console from UNICODE mode 

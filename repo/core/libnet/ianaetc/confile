@@ -1,0 +1,11 @@
+Name="ianaetc"
+Version="2.30"
+Description="The Iana-Etc package provides data for network services and protocols"
+Sourcefile="iana-etc-$Version.tar.bz2"
+Group="Core/libnet"
+
+makeit() {
+cd iana-etc-$Version
+make -j4
+make install DESTDIR=$1
+}

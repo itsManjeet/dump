@@ -1,0 +1,19 @@
+Name="bzip"
+Version="1.0.6"
+Description="The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip. "
+Sourcefile="bzip2-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd bzip2-$Version
+patch -Np1 -i $WKD/bzip2-1.0.6-install_docs-1.patch
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+make -f Makefile-libbz2_so
+make clean
+make -j4
+make install PREFIX=$1/usr
+cp -v bzip2-shared $1/usr/bin/bzip2
+cp -av libbz2.so* $1/usr/lib
+ln -sv $1/usr/lib/libbz2.so.1.0 $1/usr/lib/libbz2.so
+}

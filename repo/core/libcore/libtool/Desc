@@ -1,0 +1,3 @@
+libtool:Provides generalized library-building support services
+libtoolize:Provides a standard way to add libtool support to a package
+libltdl:Hides the various difficulties of dlopening libraries 

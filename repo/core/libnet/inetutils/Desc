@@ -1,0 +1,10 @@
+dnsdomainname:Show the system's DNS domain name
+ftp:Is the file transfer protocol program
+hostname:Reports or sets the name of the host
+ifconfig:Manages network interfaces
+ping:Sends echo-request packets and reports how long the replies take
+ping6:A version of ping for IPv6 networks
+talk:Is used to chat with another user
+telnet:An interface to the TELNET protocol
+tftp:A trivial file transfer program
+traceroute:Traces the route your packets take from the host you are working on to another host on a network, showing all the intermediate hops (gateways) along the way 

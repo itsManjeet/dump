@@ -1,0 +1,4 @@
+#!/bin/sh
+service=$(basename $(pwd))
+tty=${service/*-}
+exec setsid agetty --noclear $tty 38400 linux

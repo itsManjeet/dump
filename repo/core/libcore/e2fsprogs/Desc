@@ -1,0 +1,31 @@
+badblocks:Searches a device (usually a disk partition) for bad blocks
+chattr:Changes the attributes of files on an ext2 file system; it also changes ext3 file systems, the journaling version of ext2 file systems
+compile_et:An error table compiler; it converts a table of error-code names and messages into a C source file suitable for use with the com_err library
+debugfs:A file system debugger; it can be used to examine and change the state of an ext2 file system
+dumpe2fs:Prints the super block and blocks group information for the file system present on a given device
+e2freefrag:Reports free space fragmentation information
+e2fsck:Is used to check, and optionally repair ext2 file systems and ext3 file systems
+e2image:Is used to save critical ext2 file system data to a file
+e2label:Displays or changes the file system label on the ext2 file system present on a given device
+e2undo:Replays the undo log undo_log for an ext2/ext3/ext4 filesystem found on a device [This can be used to undo a failed operation by an e2fsprogs program.]
+e4defrag:Online defragmenter for ext4 filesystems
+filefrag:Reports on how badly fragmented a particular file might be
+fsck.ext2:By default checks ext2 file systems and is a hard link to e2fsck
+fsck.ext3:By default checks ext3 file systems and is a hard link to e2fsck
+fsck.ext4:By default checks ext4 file systems and is a hard link to e2fsck
+fsck.ext4dev:By default checks ext4 development file systems and is a hard link to e2fsck
+logsave:Saves the output of a command in a log file
+lsattr:Lists the attributes of files on a second extended file system
+mk_cmds:Converts a table of command names and help messages into a C source file suitable for use with the libss subsystem library
+mke2fs:Creates an ext2 or ext3 file system on the given device
+mkfs.ext2:By default creates ext2 file systems and is a hard link to mke2fs
+mkfs.ext3:By default creates ext3 file systems and is a hard link to mke2fs
+mkfs.ext4:By default creates ext4 file systems and is a hard link to mke2fs
+mkfs.ext4dev:By default creates ext4 development file systems and is a hard link to mke2fs
+mklost+found:Used to create a lost+found directory on an ext2 file system; it pre-allocates disk blocks to this directory to lighten the task of e2fsck
+resize2fs:Can be used to enlarge or shrink an ext2 file system
+tune2fs:Adjusts tunable file system parameters on an ext2 file system
+libcom_err:The common error display routine
+libe2p:Used by dumpe2fs, chattr, and lsattr
+libext2fs:Contains routines to enable user-level programs to manipulate an ext2 file system
+libss:Used by debugfs 

@@ -1,0 +1,13 @@
+Name="make"
+Version="4.2.1"
+Description=" The Make package contains a program for compiling packages."
+Sourcefile="$Name-$Version.tar.bz2"
+Group="Dev-tools/coredev"
+
+makeit() {
+cd $Name-$Version
+sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
+./configure --prefix=/usr
+make -j4
+make install DESTDIR=$1
+}

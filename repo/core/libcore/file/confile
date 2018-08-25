@@ -1,0 +1,13 @@
+Name="file"
+Version="5.32"
+Description="To determine type of give file"
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr
+make -j4
+# make check
+make install DESTDIR=$1
+}

@@ -1,0 +1,24 @@
+lzcat:Decompresses to standard output
+lzcmp:Runs cmp on LZMA compressed files
+lzdiff:Runs diff on LZMA compressed files
+lzegrep:Runs egrep on LZMA compressed files
+lzfgrep:Runs fgrep on LZMA compressed files
+lzgrep:Runs grep on LZMA compressed files
+lzless:Runs less on LZMA compressed files
+lzma:Compresses or decompresses files using the LZMA format
+lzmadec:A small and fast decoder for LZMA compressed files
+lzmainfo:Shows information stored in the LZMA compressed file header
+lzmore:Runs more on LZMA compressed files
+unlzma:Decompresses files using the LZMA format
+unxz:Decompresses files using the XZ format
+xz:Compresses or decompresses files using the XZ format
+xzcat:Decompresses to standard output
+xzcmp:Runs cmp on XZ compressed files
+xzdec:A small and fast decoder for XZ compressed files
+xzdiff:Runs diff on XZ compressed files
+xzegrep:Runs egrep on XZ compressed files files
+xzfgrep:Runs fgrep on XZ compressed files
+xzgrep:Runs grep on XZ compressed files
+xzless:Runs less on XZ compressed files
+xzmore:Runs more on XZ compressed files
+liblzma:The library implementing lossless, block-sorting data compression, using the Lempel-Ziv-Markov chain algorithm 

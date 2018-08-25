@@ -1,0 +1,18 @@
+Name="sed"
+Version="4.4"
+Description=" The Sed package contains a stream editor."
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i 's/usr/tools/'                 build-aux/help2man
+sed -i 's/testsuite.panic-tests.sh//' Makefile.in
+./configure --prefix=/usr --bindir=/usr/bin
+make -j4
+make html
+make check
+make install DESTDIR=$1
+install -d -m755           $1/usr/share/doc/sed-4.4
+install -m644 doc/sed.html $1/usr/share/doc/sed-4.4
+}

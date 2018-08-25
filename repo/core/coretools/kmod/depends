@@ -1,0 +1,5 @@
+glibc (dep)
+xz (dep)
+zlib (dep)
+libelf (dep)
+linux (dep)

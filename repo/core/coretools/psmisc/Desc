@@ -1,0 +1,6 @@
+fuser:Reports the Process IDs (PIDs) of processes that use the given files or file systems
+killall:Kills processes by name; it sends a signal to all processes running any of the given commands
+peekfd:Peek at file descriptors of a running process, given its PID
+prtstat:Prints information about a process
+pstree:Displays running processes as a tree
+pstree.x11:Same as pstree, except that it waits for confirmation before exiting 

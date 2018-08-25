@@ -1,0 +1,16 @@
+Name="pkgconfig"
+Version="0.29.2"
+Description=" The pkg-config package contains a tool for passing the include path and/or library paths to build tools during the configure and make file execution. "
+Sourcefile="pkg-config-$Version.tar.gz"
+Group="Dev-tools/coredev/"
+
+makeit() {
+cd pkg-config-$Version
+./configure --prefix=/usr              \
+            --with-internal-glib       \
+            --disable-host-tool        \
+            --docdir=/usr/share/doc/pkg-config-0.29.2
+make -j4
+
+make install DESTDIR=$1
+}

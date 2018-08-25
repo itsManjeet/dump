@@ -1,0 +1,17 @@
+Name="grub"
+Version="2.02"
+Description=" The GRUB package contains the GRand Unified Bootloader"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/grub"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr          \
+            --sbindir=/usr/bin        \
+            --sysconfdir=/etc      \
+            --disable-efiemu       \
+            --disable-werror
+make -j4
+# make check
+make install DESTDIR=$1
+}

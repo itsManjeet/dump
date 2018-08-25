@@ -1,0 +1,13 @@
+Name="libpipeline"
+Version="1.5.0"
+Description="The Libpipeline package contains a library for manipulating pipelines of subprocesses in a flexible and convenient way."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr
+make -j4
+# make check
+make install DESTDIR=$1
+}

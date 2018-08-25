@@ -1,0 +1,12 @@
+Name="autoconf"
+Version="2.69"
+Description=" The Autoconf package contains programs for producing shell scripts that can automatically configure source code"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Dev-tools/coredev/"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr
+make -j4
+make install DESTDIR=$1
+}

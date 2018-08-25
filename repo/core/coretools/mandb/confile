@@ -1,0 +1,20 @@
+Name="mandb"
+Version="2.8.1"
+Description="The Man-DB package contains programs for finding and viewing man pages. "
+Sourcefile="man-db-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd man-db-$Version
+./configure --prefix=/usr                        \
+            --docdir=/usr/share/doc/man-db-2.8.1 \
+            --sysconfdir=/etc                    \
+            --disable-setuid                     \
+            --enable-cache-owner=bin             \
+            --with-browser=/usr/bin/lynx         \
+            --with-vgrind=/usr/bin/vgrind        \
+            --with-grap=/usr/bin/grap            \
+            --with-systemdtmpfilesdir=
+make -j4
+make install DESTDIR=$1
+}

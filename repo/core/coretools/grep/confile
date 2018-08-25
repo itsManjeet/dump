@@ -1,0 +1,13 @@
+Name="grep"
+Version="3.1"
+Description="The Grep package contains programs for searching through files"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr --bindir=/usr/bin
+make -j4
+make check
+make install DESTDIR=$1
+}

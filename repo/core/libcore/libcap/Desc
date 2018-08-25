@@ -1,0 +1,5 @@
+capsh:A shell wrapper to explore and constrain capability support
+getcap:Examines file capabilities
+getpcaps:Displays the capabilities on the queried process(es)
+setcap:Sets file capabilities
+libcap:Contains the library functions for manipulating POSIX 1003.1e capabilities 

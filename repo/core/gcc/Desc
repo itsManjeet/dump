@@ -1,0 +1,20 @@
+c++:The C++ compiler
+cc:The C compiler
+cpp:The C preprocessor; it is used by the compiler to expand the #include, #define, and similar statements in the source files
+g++:The C++ compiler
+gcc:The C compiler
+gcc-ar:A wrapper around ar that adds a plugin to the command line. This program is only used to add "link time optimization" and is not useful with the default build options
+gcc-nm:A wrapper around nm that adds a plugin to the command line. This program is only used to add "link time optimization" and is not useful with the default build options
+gcc-ranlib:A wrapper around ranlib that adds a plugin to the command line. This program is only used to add "link time optimization" and is not useful with the default build options
+gcov:A coverage testing tool; it is used to analyze programs to determine where optimizations will have the most effect
+libasan:The Address Sanitizer runtime library
+libgcc:Contains run-time support for gcc
+libgcov:This library is linked in to a program when GCC is instructed to enable profiling
+libgomp:GNU implementation of the OpenMP API for multi-platform shared-memory parallel programming in C/C++ and Fortran
+libiberty:Contains routines used by various GNU programs, including getopt, obstack, strerror, strtol, and strtoul
+liblto_plugin:GCC's Link Time Optimization (LTO) plugin allows GCC to perform optimizations across compilation units
+libquadmath:GCC Quad Precision Math Library API
+libssp:Contains routines supporting GCC's stack-smashing protection functionality
+libstdc++:The standard C++ library
+libsupc++:Provides supporting routines for the C++ programming language
+libtsan:The Thread Sanitizer runtime library 

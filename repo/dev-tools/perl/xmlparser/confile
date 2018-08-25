@@ -1,0 +1,12 @@
+Name="xmlparser"
+Version="2.44"
+Description="The XML::Parser module is a Perl interface to James Clark's XML parser, Expat. "
+Sourcefile="XML-Parser-2.44.tar.gz"
+Group="Dev-tools/perl/xmlparser"
+
+makeit() {
+cd XML-Parser-2.44
+perl Makefile.PL
+make -j4
+make install DESTDIR=$1
+}

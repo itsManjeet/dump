@@ -1,0 +1,14 @@
+Name="findutils"
+Version="4.6.0"
+Description=" The Findutils package contains programs to find files. These programs are provided to recursively search through a directory tree and to create, maintain, and search a database (often faster than the recursive find, but unreliable if the database has not been recently updated)."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
+./configure --prefix=/usr --localstatedir=/var/lib/locate
+make -j4
+make check
+make install DESTDIR=$1
+}

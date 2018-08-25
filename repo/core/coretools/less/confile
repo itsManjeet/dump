@@ -1,0 +1,12 @@
+Name="less"
+Version="487"
+Description=" The Less package contains a text file viewer."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr --sysconfdir=/etc
+make -j4
+make install DESTDIR=$1
+}

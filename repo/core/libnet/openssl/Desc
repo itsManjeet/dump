@@ -1,0 +1,4 @@
+c_rehash:is a Perl script that scans all files in a directory and adds symbolic links to their hash values.
+openssl:is a command-line tool for using the various cryptography functions of OpenSSL's crypto library from the shell. It can be used for various functions which are documented in man 1 openssl.
+libcrypto.so:implements a wide range of cryptographic algorithms used in various Internet standards. The services provided by this library are used by the OpenSSL implementations of SSL, TLS and S/MIME, and they have also been used to implement OpenSSH, OpenPGP, and other cryptographic standards.
+libssl.so:implements the Transport Layer Security (TLS v1) protocol. It provides a rich API, documentation on which can be found by running man 3 ssl. 

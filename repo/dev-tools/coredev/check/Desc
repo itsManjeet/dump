@@ -1,0 +1,2 @@
+checkmk:Awk script for generating C unit tests for use with the Check unit testing framework
+libcheck.{a,so}:Contains functions that allow Check to be called from a test program 

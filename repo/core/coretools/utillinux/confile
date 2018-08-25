@@ -1,0 +1,26 @@
+Name="utillinux"
+Version="6.73"
+Description="The Util-linux package contains miscellaneous utility programs. Among them are utilities for handling file systems, consoles, partitions, and messages. "
+Sourcefile="util-linux-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd util-linux-$Version
+mkdir -pv /var/lib/hwclock
+mkdir -pv $1/var/lib/hwclock
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --docdir=/usr/share/doc/util-linux-2.31.1 \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-static     \
+            --without-python     \
+            --without-systemd    \
+            --without-systemdsystemunitdir
+make -j4
+make install DESTDIR=$1
+}

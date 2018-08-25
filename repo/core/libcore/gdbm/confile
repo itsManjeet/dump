@@ -1,0 +1,15 @@
+Name="gdbm"
+Version="1.14.1"
+Description="The GDBM package contains the GNU Database Manager. It is a library of database functions that use extensible hashing and work similar to the standard UNIX dbm. The library provides primitives for storing key/data pairs, searching and retrieving the data by its key and deleting a key along with its data."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr \
+            --disable-static \
+            --enable-libgdbm-compat
+make -j4
+# make check
+make install DESTDIR=$1
+}

@@ -1,0 +1,19 @@
+Name="attr"
+Version="2.4.47"
+Description="The attr package contains utilities to administer the extended attributes on filesystem objects"
+Sourcefile="$Name-$Version.src.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+sed -i -e "/SUBDIRS/s|man[25]||g" man/Makefile
+sed -i 's:{(:\\{(:' test/run
+./configure --prefix=/usr \
+            --bindir=/usr/bin \
+            --disable-static
+make -j4
+make check
+make install install-dev install-lib DESTDIR=$1
+chmod -v 755 $1/usr/lib/libattr.so
+}

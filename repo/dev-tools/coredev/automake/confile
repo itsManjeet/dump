@@ -1,0 +1,13 @@
+Name="automake"
+Version="1.15.1"
+Description="The Automake package contains programs for generating Makefiles for use with Autoconf"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Dev-tools/coredev/"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1
+make -j4
+# make check
+make install DESTDIR=$1
+}

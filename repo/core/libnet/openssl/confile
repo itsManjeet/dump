@@ -1,0 +1,22 @@
+Name="openssl"
+Version="1.1.0g"
+Description=" The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications and web browsers (for accessing HTTPS sites)"
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libnet"
+
+makeit() {
+cd $Name-$Version
+./config --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+
+make -j4
+# make check
+
+sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+make MANSUFFIX=ssl install DESTDIR=$1
+mv -v $1/usr/share/doc/openssl $1/usr/share/doc/openssl-1.1.0g
+cp -vfr doc/* $1/usr/share/doc/openssl-1.1.0g
+}

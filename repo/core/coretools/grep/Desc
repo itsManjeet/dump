@@ -1,0 +1,3 @@
+egrep:Prints lines matching an extended regular expression
+fgrep:Prints lines matching a list of fixed strings
+grep:Prints lines matching a basic regular expression 

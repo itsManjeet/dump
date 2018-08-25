@@ -1,0 +1,4 @@
+gawk (dep)
+diffutils (dep)
+m4 (dep)
+bash (dep)

@@ -1,0 +1,12 @@
+Name="gzip"
+Version="1.9"
+Description="The Gzip package contains programs for compressing and decompressing files."
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr
+make -j4
+make install DESTDIR=$1
+}

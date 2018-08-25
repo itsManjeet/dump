@@ -1,0 +1,14 @@
+Name="libelf"
+Version="0.170"
+Description="Libelf is a library for handling ELF (Executable and Linkable Format) files"
+Sourcefile="elfutils-$Version.tar.bz2"
+Group="Core/libcore"
+
+makeit() {
+cd elfutils-$Version
+./configure --prefix=/usr
+make -j4
+#make check
+make -C libelf install DESTDIR=$1
+install -vm644 config/libelf.pc $1/usr/lib/pkgconfig
+}

@@ -1,0 +1,16 @@
+Name="ninja"
+Version="1.8.2"
+Description=" Ninja is a small build system with a focus on speed"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Dev-tools/coredev/"
+
+makeit() {
+cd $Name-$Version
+export NINJAJOBS=4
+patch -Np1 -i /work/tars/ninja-1.8.2-add_NINJAJOBS_var-1.patch
+python3 configure.py --bootstrap
+mkdir $1/usr/bin
+install -vm755 ninja $1/usr/bin/
+install -vDm644 misc/bash-completion $1/usr/share/bash-completion/completions/ninja
+install -vDm644 misc/zsh-completion  $1/usr/share/zsh/site-functions/_ninja
+}

@@ -1,0 +1,9 @@
+#!/bin/sh -e
+tty=tty${1}
+if [ -d /etc/bootup/active/agetty-${tty} ];then
+  echo "This tty already exists"
+  exit 1
+fi
+mkdir /etc/bootup/active/agetty-${tty}
+ln -s /etc/bootup/all/ttys/run /etc/bootup/active/agetty-${tty}/
+ln -s /etc/bootup/all/ttys/finish /etc/bootup/active/agetty-${tty}/

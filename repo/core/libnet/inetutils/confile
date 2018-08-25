@@ -1,0 +1,21 @@
+Name="inetutils"
+Version="1.9.4"
+Description=" The Inetutils package contains programs for basic networking"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/libnet"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr        \
+            --localstatedir=/var \
+            --disable-logger     \
+            --disable-whois      \
+            --disable-rcp        \
+            --disable-rexec      \
+            --disable-rlogin     \
+            --disable-rsh        \
+            --disable-servers
+make -j4
+# make check
+make install DESTDIR=$1
+}

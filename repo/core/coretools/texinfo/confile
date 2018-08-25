@@ -1,0 +1,13 @@
+Name="texinfo"
+Version="6.5"
+Description="The Texinfo package contains programs for reading, writing, and converting info pag"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr --disable-static
+make -j4
+make install DESTDIR=$1
+make TEXMF=/usr/share/texmf install-tex DESTDIR=$1
+}

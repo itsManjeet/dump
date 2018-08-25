@@ -1,0 +1,4 @@
+binutils (dep)
+mpc (dep)
+doxygen (make)
+python (make)

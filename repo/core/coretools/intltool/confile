@@ -1,0 +1,15 @@
+Name="intltool"
+Version="0.51.0"
+Description=" The Intltool is an internationalization tool used for extracting translatable strings from source files."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i 's:\\\${:\\\$\\{:' intltool-update.in
+./configure --prefix=/usr
+make -j4
+make check
+make install DESTDIR=$1
+install -v -Dm644 doc/I18N-HOWTO $1/usr/share/doc/intltool-0.51.0/I18N-HOWTO
+}

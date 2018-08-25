@@ -1,0 +1,19 @@
+addr2line:Translates program addresses to file names and line numbers; given an address and the name of an executable, it uses the debugging information in the executable to determine which source file and line number are associated with the address
+ar:Creates, modifies, and extracts from archives
+as:An assembler that assembles the output of gcc into object files
+c++filt:Used by the linker to de-mangle C++ and Java symbols and to keep overloaded functions from clashing
+elfedit:Updates the ELF header of ELF files
+gprof:Displays call graph profile data
+ld:A linker that combines a number of object and archive files into a single file, relocating their data and tying up symbol references
+ld.gold:A cut down version of ld that only supports the elf object file format
+ld.bfd:Hard link to ld
+nm:Lists the symbols occurring in a given object file
+objcopy:Translates one type of object file into another
+objdump:Displays information about the given object file, with options controlling the particular information to display; the information shown is useful to programmers who are working on the compilation tools
+ranlib:Generates an index of the contents of an archive and stores it in the archive; the index lists all of the symbols defined by archive members that are relocatable object files
+readelf:Displays information about ELF type binaries
+size:Lists the section sizes and the total size for the given object files
+strings:Outputs, for each given file, the sequences of printable characters that are of at least the specified length (defaulting to four); for object files, it prints, by default, only the strings from the initializing and loading sections while for other types of files, it scans the entire file
+strip:Discards symbols from object files
+libbfd:The Binary File Descriptor library
+libopcodes:A library for dealing with opcodes—the “readable text” versions of instructions for the processor; it is used for building utilities like objdump 

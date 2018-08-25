@@ -1,0 +1,13 @@
+Name="groff"
+Version="1.22.3"
+Description="The Groff package contains programs for processing and formatting text. "
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+PAGE=<paper_size> ./configure --prefix=/usr
+make -j4
+make check
+make install DESTDIR=$1
+}

@@ -1,0 +1,32 @@
+Name="e2fsprogs"
+Version="1.43.9"
+Description="The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems"
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+mkdir -v build
+cd build
+LIBS=-L/usr/lib                    \
+CFLAGS=-I/usr/include              \
+PKG_CONFIG_PATH=/usr/lib/pkgconfig \
+../configure --prefix=/usr           \
+             --bindir=/usr/bin           \
+             --with-root-prefix=""   \
+             --enable-elf-shlibs     \
+             --disable-libblkid      \
+             --disable-libuuid       \
+             --disable-uuidd         \
+             --disable-fsck
+make -j4
+# make check
+make install DESTDIR=$1
+make install-libs DESTDIR=$1
+chmod -v u+w $1/usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+gunzip -v $1/usr/share/info/libext2fs.info.gz
+install-info --dir-file=$1/usr/share/info/dir $1/usr/share/info/libext2fs.info
+makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
+install -v -m644 doc/com_err.info $1/usr/share/info
+install-info --dir-file=$1/usr/share/info/dir $1/usr/share/info/com_err.info
+}

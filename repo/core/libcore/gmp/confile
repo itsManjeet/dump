@@ -1,0 +1,19 @@
+Name="gmp"
+Version="6.1.2"
+Description="The GMP package contains math libraries. These have useful functions for arbitrary precision arithmetic"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr    \
+            --enable-cxx     \
+            --disable-static \
+            --docdir=/usr/share/doc/gmp-6.1.2
+make -j4
+make html
+# make check 2>&1 | tee gmp-check-log
+# awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log
+make install DESTDIR=$1
+make install-html DESTDIR=$1
+}

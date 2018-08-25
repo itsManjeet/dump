@@ -1,0 +1,4 @@
+glibc (dep)
+zlib (dep)
+bc (check)
+dejagnu (check)

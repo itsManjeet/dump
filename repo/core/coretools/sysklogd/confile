@@ -1,0 +1,20 @@
+Name="sysklogd"
+Version="1.5.1"
+Description=" The Sysklogd package contains programs for logging system messages, such as those given by the kernel when unusual things happen."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i '/Error loading kernel symbols/{n;n;d}' ksym_mod.c
+sed -i 's/union wait/int/' syslogd.c
+make -j4
+mkdir -p $1/usr/share/man/man8
+mkdir -p $1/usr/share/man/man5
+mkdir -p $1/usr/bin
+make BINDIR=$1/usr/bin prefix=$1 install
+if [ ! -d $1/etc/ ] ; then
+	mkdir $1/etc
+fi
+cp $WKD/sysklog.conf $1/etc/
+}

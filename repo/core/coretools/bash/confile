@@ -1,0 +1,28 @@
+Name="bash"
+Version="4.4.18"
+Description="The Bash package contains the Bourne-Again SHell."
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/bash-4.4.18 \
+            --without-bash-malloc               \
+            --with-installed-readline
+make -j4
+make install DESTDIR=$1
+
+install --directory --mode=0755 --owner=root --group=root $1/etc/profile.d
+cp $WKD/bashrc $1/etc/
+cp $WKD/profile $1/etc/
+cp $WKD/bashrc_user $1/etc/skel/.bashrc
+cp $WKD/bash_completion.sh $1/etc/profile.d
+cp $WKD/dircolor.sh $1/etc/profile.d
+cp $WKD/extrapaths.sh $1/etc/profile.d
+cp $WKD/readline.sh $1/etc/profile.d
+cp $WKD/umask.sh $1/etc/profile.d
+cp $WKD/i18n.sh $1/etc/profile.d
+install --directory --mode=0755 --owner=root --group=root $1/etc/bash_completion.d
+dircolors -p > $1/etc/dircolors
+}

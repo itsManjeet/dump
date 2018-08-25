@@ -1,0 +1,5 @@
+2to3:is a Python program that reads Python 2.x source code and applies a series of fixes to transform it into valid Python 3.x code.
+idle3:is a wrapper script that opens a Python aware GUI editor. For this script to run, you must have installed Tk before Python so that the Tkinter Python module is built.
+pydoc3:is the Python documentation tool.
+python3:is an interpreted, interactive, object-oriented programming language.
+pyvenv:creates virtual Python environments in one or more target directories. 

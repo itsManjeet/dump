@@ -1,0 +1,22 @@
+Name="binutils"
+Version="2.30"
+Description="contains a linker, an assembler, and other tools for handling object files"
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/binutils"
+
+makeit() {
+cd $Name-$Version
+mkdir -v build
+cd       build
+../configure --prefix=/usr       \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+             --enable-64-bit-bfd \
+             --with-system-zlib
+make tooldir=/usr -j4
+#make -k check
+make install tooldir=/usr DESTDIR=$1
+}

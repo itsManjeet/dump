@@ -1,0 +1,4 @@
+glibc (dep)
+bash (dep)
+tar (dep)
+gcc (dep)

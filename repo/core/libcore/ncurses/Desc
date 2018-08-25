@@ -1,0 +1,16 @@
+captoinfo:Converts a termcap description into a terminfo description
+clear:Clears the screen, if possible
+infocmp:Compares or prints out terminfo descriptions
+infotocap:Converts a terminfo description into a termcap description
+ncursesw6-config:Provides configuration information for ncurses
+reset:Reinitializes a terminal to its default values
+tabs:Clears and sets tab stops on a terminal
+tic:The terminfo entry-description compiler that translates a terminfo file from source format into the binary format needed for the ncurses library routines [A terminfo file contains information on the capabilities of a certain terminal.]
+toe:Lists all available terminal types, giving the primary name and description for each
+tput:Makes the values of terminal-dependent capabilities available to the shell; it can also be used to reset or initialize a terminal or report its long name
+tset:Can be used to initialize terminals
+libcursesw:A link to libncursesw
+libncursesw:Contains functions to display text in many complex ways on a terminal screen; a good example of the use of these functions is the menu displayed during the kernel's make menuconfig
+libformw:Contains functions to implement forms
+libmenuw:Contains functions to implement menus
+libpanelw:Contains functions to implement panels 

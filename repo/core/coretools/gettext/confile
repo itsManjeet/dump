@@ -1,0 +1,17 @@
+Name="gettext"
+Version="0.19.8.1"
+Description="The Gettext package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. "
+Sourcefile="$Name-$Version.tar.xz"
+Group="Core/coretools"
+
+makeit() {
+cd $Name-$Version
+sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in &&
+sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/gettext-0.19.8.1
+make -j4
+make install DESTDIR=$1
+chmod -v 0755 $1/usr/lib/preloadable_libintl.so
+}

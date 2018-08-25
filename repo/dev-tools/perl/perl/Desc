@@ -1,0 +1,33 @@
+c2ph:Dumps C structures as generated from cc -g -S
+corelist:A commandline frontend to Module::CoreList
+cpan:Interact with the Comprehensive Perl Archive Network (CPAN) from the command line
+enc2xs:Builds a Perl extension for the Encode module from either Unicode Character Mappings or Tcl Encoding Files
+encguess:Guess the encoding type of one or several files
+h2ph:Converts .h C header files to .ph Perl header files
+h2xs:Converts .h C header files to Perl extensions
+instmodsh:Shell script for examining installed Perl modules, and can create a tarball from an installed module
+json_pp:Converts data between certain input and output formats
+libnetcfg:Can be used to configure the libnet Perl module
+perl:Combines some of the best features of C, sed, awk and sh into a single swiss-army language
+perl5.26.1:A hard link to perl
+perlbug:Used to generate bug reports about Perl, or the modules that come with it, and mail them
+perldoc:Displays a piece of documentation in pod format that is embedded in the Perl installation tree or in a Perl script
+perlivp:The Perl Installation Verification Procedure; it can be used to verify that Perl and its libraries have been installed correctly
+perlthanks:Used to generate thank you messages to mail to the Perl developers
+piconv:A Perl version of the character encoding converter iconv
+pl2pm:A rough tool for converting Perl4 .pl files to Perl5 .pm modules
+pod2html:Converts files from pod format to HTML format
+pod2man:Converts pod data to formatted *roff input
+pod2text:Converts pod data to formatted ASCII text
+pod2usage:Prints usage messages from embedded pod docs in files
+podchecker:Checks the syntax of pod format documentation files
+podselect:Displays selected sections of pod documentation
+prove:Command line tool for running tests against the Test::Harness module
+pstruct:Dumps C structures as generated from cc -g -S stabs
+ptar:A tar-like program written in Perl
+ptardiff:A Perl program that compares an extracted archive with an unextracted one
+ptargrep:A Perl program that applies pattern matching to the contents of files in a tar archive
+shasum:Prints or checks SHA checksums
+splain:Is used to force verbose warning diagnostics in Perl
+xsubpp:Converts Perl XS code into C code
+zipdetails:Displays details about the internal structure of a Zip file 

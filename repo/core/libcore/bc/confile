@@ -1,0 +1,17 @@
+Name="bc"
+Version="1.07.1"
+Description="arbitrary precision numeric processing language"
+Sourcefile="$Name-$Version.tar.gz"
+Group="Core/libcore"
+
+makeit() {
+cd $Name-$Version
+sh $WKD/pre_fix.sh
+./configure --prefix=/usr           \
+            --with-readline         \
+            --mandir=/usr/share/man \
+            --infodir=/usr/share/info
+
+make -j4
+make install DESTDIR=$1
+}
