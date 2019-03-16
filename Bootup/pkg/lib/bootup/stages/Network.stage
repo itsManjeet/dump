@@ -1,0 +1,28 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+MSG="Setting Up Networking"
+DEP=( "MountPoint" )
+
+start_stage() {
+    [ -r /etc/sysconfig/network ] && source /etc/sysconfig/network
+
+    ip link set up dev lo &
+
+    [ -r /etc/hostname ] && HOSTNAME=$(cat /etc/hostname)
+
+    hostname ${HOSTNAME}
+
+    export IN_BOOT=1
+    
+    for file in /etc/sysconfig/ifconfig.* ;do
+        interface=${file##*/ifconfig.}
+        if [ "${interface}" == "*"] ; then
+            continue
+        fi
+        ifup ${interface}
+    done
+
+    unset IN_BOOT
+
+}
