@@ -1,0 +1,16 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+MSG="Checking file system"
+DEP=( "MountPoint" )
+
+start_stage() {
+    [ -f /etc/sysconfig/boot/checkfs ] && source /etc/sysconfig/boot/checkfs
+    mount -o remount,ro /
+    fsck -A -T -a -t noopts=_netdev
+    if [[ ${?} -gt 1 ]] ; then
+        rescue_shell()
+    fi
+
+    mount -o remount,rw /
+}
