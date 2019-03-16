@@ -1,0 +1,15 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+MSG="Setting console log"
+DEP=( "MountPoint" )
+
+start_stage() {
+    [ -f /etc/sysconfig/dmesg ] && source /etc/sysconfig/dmesg
+    [ -f /etc/sysconfig/syslogd ] && source /etc/sysconfig/syslogd
+    dmesg -n ${LOGLEVEL:-4} &
+    
+    syslogd ${SYSLOGD_PARAMS:-'-m 0'}
+    klogd ${KLOGD_PARAMS}
+
+}
