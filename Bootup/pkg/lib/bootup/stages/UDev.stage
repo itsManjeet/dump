@@ -1,0 +1,14 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+MSG="Udevadm Starting"
+DEP=( "MountPoint" )
+
+start_stage() {
+    {
+        udevd --daemon;
+        udevadm trigger --action=add --type=subsystem;
+        udevadm trigger --action=add --type=devices;
+        udevadm settle;
+    } || rescue_shell
+}
