@@ -1,0 +1,21 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+MSG="Checking file system"
+DEP=( "MountPoint" )
+
+start_stage() {
+    [ -f /etc/sysconfig/console ] && source /etc/sysconfog/console
+    loadkeys -q -u ${KEYMAP:-us} &
+    hwclock --hctosys --${HARDWARECLOCK:-localtime}  --noadjfile &
+
+    for i in /dev/tty[0-6] ; do
+        unicode_start < $i
+    done
+
+    if [ -n ${FONT} ] ; then
+        for i in /dev/tty[0-6] ; do
+            setfont ${FONT_MAP:+-m $FONT_MAP} ${FONT_UNIMAP:+-u $FONT_UNIMAP} $FONT -C $i
+        done
+    fi
+}
