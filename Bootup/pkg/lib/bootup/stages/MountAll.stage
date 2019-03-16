@@ -1,0 +1,9 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+MSG="Mounting all non-network filesystem"
+DEP=( "MountPoint" "FSCheck" )
+
+start_stage() {
+    mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev
+}
