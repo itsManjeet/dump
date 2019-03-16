@@ -1,0 +1,20 @@
+#!/bin/sh
+source "/lib/bootup/functions.sh"
+
+STAGES="/lib/bootup/stages/"
+
+msg_done "mounting filesystem"
+mount -t devtmpfs none /dev
+mount -t proc     none /proc 
+mount -t sysfs    none /sys
+mount -t tmpfs    none /run
+
+if [ ! -d ${STAGES} ] ; then
+    msg_fail "missing stages ${STAGES}"
+    msg "dropping to rescue shell"
+    /bin/sh
+fi
+
+for stage in ${STAGES}/*.stage ; then
+    start_stage ${stage} &
+done
