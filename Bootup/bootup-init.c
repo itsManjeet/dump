@@ -11,7 +11,7 @@ int bootup_reboot(int code);
 void rescue_shell();
 
 int main(int argc, char* argv[]) {
-    
+    int a;
     /* Check SuperUser */
     if (geteuid() != 0) {
         fprintf(stderr,"should be executed with root permissions\n");
@@ -33,16 +33,11 @@ int main(int argc, char* argv[]) {
             rescue_shell();
         }
     }
-
-    pid_t pid = fork();
-
-    if (pid == 0) {
-        fprintf(stdout,"starting stage 1\n");
-        system(files[0]);
-        fprintf(stdout,"stage 1 complete\nstarting stage 2\n");
-        system(files[1]);
-    }
-        
+    fprintf(stdout,"starting stage 1\n");
+    system(files[0]);
+    scanf("%d",&a);
+    fprintf(stdout,"stage 1 complete\nstarting stage 2\n");
+    system(files[1]);        
 }
 
 int bootup_reboot(int code) {
