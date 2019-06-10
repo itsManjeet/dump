@@ -1,5 +1,5 @@
 #!/bin/bash
-. /System/Nishu/commands/inc/inc
+. /System/Nishu/commands/
 makeit() {
 	Size=$(du -hs $WRKDIR/INSTALLED/ | cut -f1)
 	cd $WRKDIR/INSTALLED
